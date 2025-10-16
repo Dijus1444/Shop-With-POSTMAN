@@ -32,9 +32,9 @@ reponse.send(product);
 app.post("/shop/products", (request, reponse) => {
     const newProduct = {
         id: list.length + 1,
-        product: "Bread",
-        type: "White",
-        price: "1.20",
+        product: request.body.product,
+        type: request.body.type,
+        price: request.body.price,
     };
     list.push(newProduct);
     reponse.send(list); 
@@ -44,13 +44,13 @@ app.post("/shop/products", (request, reponse) => {
 app.put("/shop/products/:id", (request, reponse) => {
     const myproduct = list.find(
     (product)=> product.id === parseInt(request.params.id))
-
+// (product)=> console.log(product.id))
 if (!myproduct) {
     reponse.status(404).send("not found");
 }
-myproduct.product = "Eggs";
-myproduct.type = "L";
-myproduct.price = "3.12";
+myproduct.product =  request.body.product,
+myproduct.type = request.body.type,
+myproduct.price = request.body.price,
 reponse.send(myproduct);
 });
 
@@ -66,11 +66,6 @@ reponse.send(myproduct);
 });
 
 
-
-// server work? no
-if (!myproduct) {
-    reponse.status(404).send("not found");
-}
 // server work? yes
 app.listen(8080, ()=> {
     console.log("Serveris veikia");
