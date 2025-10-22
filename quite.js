@@ -48,9 +48,7 @@ app.put("/shop/products/:id", (request, reponse) => {
 if (!myproduct) {
     reponse.status(404).send("not found");
 }
-myproduct.product =  request.body.product,
-myproduct.type = request.body.type,
-myproduct.price = request.body.price,
+const { product, type, price } = req.body;
 reponse.send(myproduct);
 });
 
